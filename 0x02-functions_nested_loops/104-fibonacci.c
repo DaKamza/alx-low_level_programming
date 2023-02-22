@@ -17,6 +17,7 @@ int numLength(int n)
 		n = n / 10;
 		length += 1;
 	}
+	return (length);
 }
 /**
  * main - prints the first 98 fibonacci sequence
