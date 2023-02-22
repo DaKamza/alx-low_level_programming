@@ -32,7 +32,7 @@ int main(void)
 	{
 		if (f10 > 0)
 			printf("%lu", f10);
-		initial0s = numLength(mx) -1 - numLength(f1);
+		initial0s = numLength(mx) - 1 - numLength(f1);
 		while (f10 > 0 && initial0s > 0)
 		{
 			printf("%i", 0);
