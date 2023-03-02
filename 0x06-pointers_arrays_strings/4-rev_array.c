@@ -3,15 +3,17 @@
  * reverse_array - reverses the array
  * @a: the array to be reversed
  * @n: the number of elements in the array
+ * Return: void
  */
-void reverse_array(int *a, int n);
+void reverse_array(int *a, int n)
 {
-	int arr, i;
-	
-	for (i = n - 1; i >= n / 2; i++)
+	int i;
+	int t;
+
+	for (i = 0; i < n--; i++)
 	{
-		arr = a[n - 1 - i];
-		a[n - 1 - i] = a[i];
-		a[i] = arr;
+		t = a[i];
+		a[i] = a[n];
+		a[n] = t;
 	}
 }
