@@ -6,24 +6,19 @@
  * @size: size of array
  * @c: char to assign
  * Description: create array size and assign char c
- * Return: pointer to array, NULL if fail
- *
+ * Return: pointer to array and NULL if no success
  */
 char *create_array(unsigned int size, char c)
 {
+	
 
 	char *str = malloc(sizeof(char) * size);
-
 	if (size == 0 || str == NULL)
 		return (NULL);
 
-	unsigned int i;
+	unsigned int j;
 
-	while (i < size)
-	{
-		str[i] = c;
-		i++;
-	}
-
+	for (j = 0; j < size; j++)
+		str[j] = c;
 	return (str);
 }
