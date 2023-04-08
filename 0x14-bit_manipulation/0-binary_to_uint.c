@@ -7,6 +7,7 @@
  */
 unsigned int binary_to_uint(const char *b)
 {
+	int j;
 	unsigned int con_val = 0;
 
 	if (b == NULL)
@@ -14,12 +15,12 @@ unsigned int binary_to_uint(const char *b)
 
 	while (b != NULL)
 	{
-		if (b < '0' || b > '1')
+		if (b[j] < '0' || b[j] > '1')
 		{
 			return (0);
 		}
-		con_num = (con_num * 2) + (b - '0');
-		b++;
+		con_num = (con_num * 2) + (b[j] - '0');
+		i++;
 
 	}
 	return (con_num);
