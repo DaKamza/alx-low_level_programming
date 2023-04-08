@@ -8,19 +8,19 @@
 unsigned int binary_to_uint(const char *b)
 {
 	int j;
-	unsigned int con_val = 0;
+	unsigned int con_num = 0;
 
 	if (b == NULL)
 		return (0);
 
-	while (b != NULL)
+	while (b[j] != '\0')
 	{
 		if (b[j] < '0' || b[j] > '1')
 		{
 			return (0);
 		}
 		con_num = (con_num * 2) + (b[j] - '0');
-		i++;
+		j++;
 
 	}
 	return (con_num);
