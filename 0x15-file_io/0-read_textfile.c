@@ -21,7 +21,7 @@ ssize_t read_textfile(const char *filename, size_t letters)
 	if (fd < 0)
 		return (0);
 
-	letters = fread(fb, sizeof(char), letters, fd);
+	count = fread(fb, sizeof(char), letters, fd);
 	fwrite(fb, sizeof(char), count, stdout);
 
 	fclose(fd);
