@@ -11,15 +11,23 @@
 ssize_t read_textfile(const char *filename, size_t letters)
 {
 	char *fb;
-	FILE *file;
+	int file;
 	ssize_t count;
+
+	if (filename == NULL)
+		return (0);
+
 
 	file = fopen(filename, "r");
 	if (file < 0)
 		return (0);
 
-	file = malloc(sizeof(char) * letters);
-	count = write(STDOUT_FILENO, fb, (read(file, fb, letters)));
+	fb = malloc(sizeof(char) * letters);
+	if (fb == NULL)
+		return (0);
+	count = write(STDOUT_FILENO, fb, read(file, fb, letters));
+	if (count < 0)
+		return (0);
 
 	free(fb);
 	close(file);
