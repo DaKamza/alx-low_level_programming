@@ -1,5 +1,6 @@
 #include "main.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 /**
  * read_textfile- Read file print to STDOUT.
@@ -18,16 +19,23 @@ ssize_t read_textfile(const char *filename, size_t letters)
 		return (0);
 
 
-	file = fopen(filename, "r");
+	file = open(filename, O_RDONLY);
 	if (file < 0)
 		return (0);
 
 	fb = malloc(sizeof(char) * letters);
 	if (fb == NULL)
+	{
+		close(file);
 		return (0);
+	}
 	count = write(STDOUT_FILENO, fb, read(file, fb, letters));
 	if (count < 0)
+	{
+		free(fb);
+		close(file);
 		return (0);
+	}
 
 	free(fb);
 	close(file);
