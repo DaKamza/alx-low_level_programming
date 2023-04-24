@@ -6,9 +6,9 @@ char *create_buffer(char *file);
 void close_file(int fd);
 
 /**
- * create_buffer - Allocates 1024 bytes for a buffer.
- * @file: The name of the file buffer is storing chars for.
- * Return: A pointer to the newly-allocated buffer.
+ * create_buffer - Allocates 1024 bytes.
+ * @file: The filename buffer is storing chars for.
+ * Return: A pointer to the allocated buffer.
  */
 char *create_buffer(char *file)
 {
@@ -18,7 +18,7 @@ char *create_buffer(char *file)
 
 	if (buffer == NULL)
 	{
-		dprintf(STDERR_FILENO,
+		fprintf(stderr,
 			"Error: Can't write to %s\n", file);
 		exit(99);
 	}
@@ -28,7 +28,7 @@ char *create_buffer(char *file)
 
 /**
  * close_file - Closes file descriptors.
- * @fd: The file descriptor to be closed.
+ * @fd: The file descriptot.
  */
 void close_file(int fd)
 {
@@ -45,53 +45,52 @@ void close_file(int fd)
 
 /**
  * main - Copies the contents of a file to another file.
- * @argc: The number of arguments supplied to the program.
+ * @argc: The number of arguments provided.
  * @argv: An array of pointers to the arguments.
- *
- * Return: 0 on success.
- *
+ * Return: on success 0.
  * Description: If the argument count is incorrect - exit code 97.
  * If file_from does not exist or cannot be read - exit code 98.
  * If file_to cannot be created or written to - exit code 99.
  * If file_to or file_from cannot be closed - exit code 100.
  */
-int main(int argc, char *argv[]
+int main(int argc, char *argv[])
 {
 	if (argc != 3)
 	{
-		printf("Usage: cp file_from file_to\n");
-		return 1;
+		fprintf(stderr, "Usage: cp file_from file_to\n");
+		return (1);
 	}
-
 	FILE *file_from = fopen(argv[1], "r");
+
 	if (!file_from)
 	{
-		printf("Error: Can't read from file %s\n", argv[1]);
-		return 2;
+		fprintf(stderr, "Error: Can't read from file %s\n", argv[1]);
+		return (2);
 	}
-
 	FILE *file_to = fopen(argv[2], "w");
+
 	if (!file_to)
 	{
-		printf("Error: Can't write to %s\n", argv[2]);
+		fprintf(stderr, "Error: Can't write to %s\n", argv[2]);
 		fclose(file_from);
-		return 3;
+		return (3);
 	}
 	char buffer[1024];
-	size_t nread;
-	while ((nread = fread(buffer, 1, sizeof buffer, file_from)) > 0) {
-		if (fwrite(buffer, 1, nread, file_to) != nread) {
-			printf("Error: Can't write to %s\n", argv[2]);
+	size_t numread;
+
+	while ((numread = fread(buffer, 1, sizeof(buffer), file_from)) > 0)
+	{
+		if (fwrite(buffer, 1, numread, file_to) != numread)
+		{
+			fprintf(stderr, "Error: Can't write to %s\n", argv[2]);
 			fclose(file_from);
 			fclose(file_to);
-			return 4;
+			return (4);
 		}
 	}
 
 	fclose(file_from);
 	fclose(file_to);
 
-	return 0;
-
-	}
+	return (0);
 }
