@@ -6,8 +6,9 @@ char *create_buffer(char *file);
 void close_file(int fd);
 
 /**
- * create_buffer - Allocates 1024 bytes.
- * @file: The filename buffer is storing chars for.
+ * create_buffer - Allocates 1024 bytes
+ * @file: The filename buffer is storing characters.
+ *
  * Return: A pointer to the allocated buffer.
  */
 char *create_buffer(char *file)
@@ -32,11 +33,11 @@ char *create_buffer(char *file)
  */
 void close_file(int fd)
 {
-	int close;
+	int c;
 
-	close = close(fd);
+	c = close(fd);
 
-	if (close == -1)
+	if (c == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
 		exit(100);
@@ -46,7 +47,7 @@ void close_file(int fd)
 /**
  * main - Copies the contents of a file
  * @argc: The number of arguments provided
- * @argv: An array of pointers to the arguments.
+ * @argv: An array of pointers
  * Return: on success 0.
  * Description: If the argument count is incorrect - exit code 97.
  * If file_from does not exist or cannot be read - exit code 98.
@@ -55,7 +56,7 @@ void close_file(int fd)
  */
 int main(int argc, char *argv[])
 {
-	int from, to, read, write;
+	int from, to, r, w;
 	char *buffer;
 
 	if (argc != 3)
@@ -66,7 +67,7 @@ int main(int argc, char *argv[])
 
 	buffer = create_buffer(argv[2]);
 	from = open(argv[1], O_RDONLY);
-	read = read(from, buffer, 1024);
+	r = read(from, buffer, 1024);
 	to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
 
 	do {
@@ -78,7 +79,7 @@ int main(int argc, char *argv[])
 			exit(98);
 		}
 
-		write = write(to, buffer, r);
+		w = write(to, buffer, r);
 		if (to == -1 || w == -1)
 		{
 			dprintf(STDERR_FILENO,
@@ -87,10 +88,10 @@ int main(int argc, char *argv[])
 			exit(99);
 		}
 
-		read = read(from, buffer, 1024);
+		r = read(from, buffer, 1024);
 		to = open(argv[2], O_WRONLY | O_APPEND);
 
-	} while (read > 0);
+	} while (r > 0);
 
 	free(buffer);
 	close_file(from);
