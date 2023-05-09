@@ -6,16 +6,20 @@
  * @m: second number
  * Return: number of bits
  */
+
 unsigned int flip_bits(unsigned long int n, unsigned long int m)
 {
 	int j;
 	int count = 0;
+	unsigned long int current;
 	unsigned long int exclusive = n ^ m;
 
-	for (j = 0; j < sizeof(exclusive) * 8; j++)
+	for (j = 63; j >= 0; j--)
 	{
-		if (exclusive & (1UL << j))
+		current = exclusive >> j;
+		if (current & 1)
 			count++;
 	}
+
 	return (count);
 }
