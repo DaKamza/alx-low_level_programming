@@ -82,7 +82,7 @@ int main(int argc, char *argv[])
 		}
 
 		wt = write(to, buffer, rd);
-		if (to == -1 || w == -1)
+		if (to == -1 || wt == -1)
 		{
 			dprintf(STDERR_FILENO,
 				"Error: Can't write to %s\n", argv[2]);
