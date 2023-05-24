@@ -177,12 +177,13 @@ void print_osabi(unsigned char *e_ident)
 /**
  * print_abi - Prints the ABI version
  * @e_ident: pointer to an array with the ELF ABI version.
- */
+ *
 void print_abi(unsigned char *e_ident)
 {
 	printf(" ABI Version: %d\n",
 		e_ident[EI_ABIVERSION]);
 }
+ */
 
 /**
  * print_type - function prints type of an ELF header.
